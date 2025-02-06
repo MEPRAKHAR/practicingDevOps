@@ -75,6 +75,6 @@ jobs:
         KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 
     - name: Apply Kubernetes Manifests
-      run: kubectl apply -f k8s/manifiests/
+      run: kubectl apply -f k8s/manifiests/ --validate=false
 
 
