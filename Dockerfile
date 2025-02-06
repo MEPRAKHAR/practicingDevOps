@@ -1,4 +1,4 @@
-FROM golang:1.18 as base
+FROM golang:1.18 AS base
 
 WORKDIR /app
 
@@ -13,3 +13,4 @@ RUN go build -o main
 EXPOSE 8080
 
 CMD ["./main"]
+    
