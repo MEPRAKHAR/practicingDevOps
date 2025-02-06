@@ -38,9 +38,9 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f ./k8s/manifests/deployment.yaml
-          kubectl apply -f ./k8s/manifests/service.yaml
-          kubectl apply -f ./k8s/manifests/ingress.yaml
+          kubectl apply -f ./k8s/manifiests/deployment.yaml
+          kubectl apply -f ./k8s/manifiests/service.yaml
+          kubectl apply -f ./k8s/manifiests/ingress.yaml
 
       - name: Wait for deployment to finish
         run: |
