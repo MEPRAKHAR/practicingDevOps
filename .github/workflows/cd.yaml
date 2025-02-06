@@ -23,7 +23,7 @@ jobs:
           export KUBECONFIG=kubeconfig.yaml
 
       - name: Deploy to Kubernetes
-        run: kubectl apply -f .github/workflows/deployment.yaml
+        run: kubectl apply -f ./k8s/manifiests/deployment.yaml
 
       - name: Update Kubernetes Deployment Image
         run: kubectl set image deployment/go-web-app go-web-app=baby6ix/go-web-app:${{ github.sha }}
