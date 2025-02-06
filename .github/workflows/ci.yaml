@@ -77,7 +77,6 @@ jobs:
         echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ~/.kube/config
         kubectl config use-context github-actions
         kubectl version --client
-        kubectl get nodes
 
     - name: Update Image Tags
       run: |
@@ -88,3 +87,4 @@ jobs:
       run: |
         kubectl apply -f k8s/manifiests/
         kubectl rollout status deployment/go-web-app
+        
