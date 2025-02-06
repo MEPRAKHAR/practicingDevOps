@@ -59,25 +59,27 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-  # First fix: Proper kubeconfig setup
-    - name: Configure Kubernetes
-      uses: azure/k8s-set-context@v3
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
       with:
-        kubeconfig: ${{ secrets.KUBE_CONFIG }}
-        set-context: current-context
+        version: 'latest'
 
-  # Second fix: Verify cluster connection
-    - name: Verify Cluster Access
-      run: kubectl cluster-info
+    - name: Configure Kubernetes
+      run: |
+        mkdir -p ~/.kube
+        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ~/.kube/config
+        chmod 600 ~/.kube/config
+        kubectl config view
+        kubectl cluster-info
 
-  # Third fix: Update image tags
-    - name: Update Image in Deployment
+    - name: Update Image Tags
       run: |
         sed -i "s|baby6ix|${{ secrets.DOCKERHUB_USERNAME }}|g" k8s/manifiests/deployment.yaml
         sed -i "s|IMAGE_TAG|${{ github.run_id }}|g" k8s/manifiests/deployment.yaml
 
-  # Fourth fix: Proper manifest application
-    - name: Deploy to Cluster
-      run: kubectl apply -f k8s/manifiests/
+    - name: Apply Manifests
+      run: |
+        kubectl apply -f k8s/manifiests/
+        kubectl rollout status deployment/go-web-app
 
 
