@@ -56,8 +56,15 @@ jobs:
     needs: push
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Set up kubectl
       uses: azure/setup-kubectl@v3
@@ -68,9 +75,9 @@ jobs:
       run: |
         mkdir -p ~/.kube
         echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ~/.kube/config
-        chmod 600 ~/.kube/config
-        kubectl config view
-        kubectl cluster-info
+        kubectl config use-context github-actions
+        kubectl version --client
+        kubectl get nodes
 
     - name: Update Image Tags
       run: |
@@ -81,5 +88,3 @@ jobs:
       run: |
         kubectl apply -f k8s/manifiests/
         kubectl rollout status deployment/go-web-app
-
-
