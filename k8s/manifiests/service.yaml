@@ -4,12 +4,9 @@ metadata:
   name: go-web-app
   labels:
     app: go-web-app
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: ""
 spec:
   ports:
-  - name: http
-    port: 80
+  - port: 80
     targetPort: 8080
     protocol: TCP
   selector:
