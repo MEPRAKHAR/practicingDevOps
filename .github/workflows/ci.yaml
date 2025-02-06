@@ -34,7 +34,11 @@ jobs:
       - name: Set up kubectl
         uses: azure/setup-kubectl@v1
         with:
-          kubeconfig: ${{ secrets.K8S_KUBECONFIG }}  
+          kubeconfig: ${{ secrets.K8S_KUBECONFIG }}
+
+      - name: Check kubectl config
+        run: |
+          kubectl config view 
 
       - name: Deploy to Kubernetes
         run: |
