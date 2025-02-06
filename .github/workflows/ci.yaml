@@ -38,6 +38,7 @@ jobs:
 
       - name: Set up kubeconfig
         run: |
+          mkdir -p $HOME/.kube
           echo "${{ secrets.K8S_KUBECONFIG }}" > $HOME/.kube/config
 
       - name: Check kubectl config
