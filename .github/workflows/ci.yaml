@@ -40,6 +40,11 @@ jobs:
         run: |
           kubectl config view 
 
+      - name: Debug Kubernetes Connection
+        run: |
+          kubectl cluster-info
+          kubectl get nodes
+
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f ./k8s/manifiests/deployment.yaml --validate=false
