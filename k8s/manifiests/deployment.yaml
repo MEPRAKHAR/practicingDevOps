@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: baby6ix/go-web-app:${GITHUB_SHA}
-        imagePullPolicy: Always
+        image: baby6ix/go-web-app
         ports:
         - containerPort: 8080
