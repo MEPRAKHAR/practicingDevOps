@@ -17,7 +17,7 @@ spec:
             
       containers:
       - name: go-web-app
-        image: baby6ix/go-web-app:latest
+        image: baby6ix/go-web-app:IMAGE_TAG
         ports:
         - containerPort: 8080
           
