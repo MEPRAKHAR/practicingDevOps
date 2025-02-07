@@ -14,19 +14,11 @@ spec:
       labels:
         app: go-web-app
     spec:
-      imagePullSecrets:    
-      - name: regcred      
+            
       containers:
       - name: go-web-app
         image: baby6ix/go-web-app:latest
         ports:
         - containerPort: 8080
           
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
 
-          
