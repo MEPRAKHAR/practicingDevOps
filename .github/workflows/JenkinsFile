@@ -22,7 +22,6 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                // Build a Docker image (adjust image name/tag as needed)
                 script {
                     def dockerImage = docker.build("myapp:${env.BUILD_ID}")
                 }
