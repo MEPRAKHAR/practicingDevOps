@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
     steps {
         script {
-            // Stop any existing container
+            
             sh 'docker rm -f myapp || true'
 
             // Run the container on port 8080
