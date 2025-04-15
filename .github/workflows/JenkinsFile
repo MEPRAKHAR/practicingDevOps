@@ -28,10 +28,17 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                echo "Deploy step goes here (e.g., push image to a registry, deploy to a server, etc.)"
-            }
+    steps {
+        script {
+            // Stop any existing container
+            sh 'docker rm -f myapp || true'
+
+            // Run the container on port 8080
+            sh "docker run -d -p 8080:8080 --name myapp myapp:${env.BUILD_ID}"
         }
+    }
+}
+
     }
     
     post {
